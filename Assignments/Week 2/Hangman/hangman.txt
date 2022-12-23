@@ -1,0 +1,36 @@
+import random
+def hangman():
+    words = ["program", "cars", "python"]
+    correctletters = []
+    answer = random.choice(words)
+    answerhold = ['*'] * len(answer)
+    incorrectguesses = 0
+    correctguesses = 0
+    while (correctguesses != len(answer)):
+        print("[Guess] Enter a letter in word ", answerhold)
+        guess = input()
+        if guess in answer:
+            if guess in correctletters:
+                print(guess + " has already been guessed.")
+            else:
+                correctletters.append(guess)
+                for i in range(0, len(answer), 1):
+                    if guess == answer[i]:
+                        answerhold[i] = guess
+                correctguesses += answer.count(guess)
+        else:
+            print(guess + " is not in the word.")
+            incorrectguesses += 1
+    print("The word is " + answer + ". You missed " + str(incorrectguesses) + " time(s).")
+def main():
+    hangman()
+    choice = input("Do you want to play again? ")
+    while(choice == 'y'):
+        hangman()
+        choice = input("Do you want to play again? ")
+        if (choice == 'y'):
+            hangman()
+        else:
+            exit()
+if __name__ == "__main__":
+    main()
